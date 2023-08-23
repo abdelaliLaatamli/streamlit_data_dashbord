@@ -43,20 +43,20 @@ if start_date and end_date:
 if not data.empty :
     c1,c2,c3,c4,c5=st.columns(5)
     with c1:
-       st.info('Percentile 25 %', icon="⏱")
-       st.metric(label='USD', value=f"{np.percentile(data['total_count'], 25):,.2f}")
+       st.info('Queued', icon="📤")
+       st.metric(label='Message', value=f"{data['total_count'].sum() }")
     with c2:
-       st.info('Percentile 50 %', icon="⏱")
-       st.metric(label='USD', value=f"{np.percentile(data['total_count'], 50):,.2f}")
+       st.info('Delivered', icon="🚚")
+       st.metric(label='Message', value=f"{data[data['type'] == 'delivered']['total_count'].sum()}")
     with c3:
-       st.info('Percentile 75 %', icon="⏱")
-       st.metric(label='USD', value=f"{np.percentile(data['total_count'], 75):,.2f}")
+       st.info('Bounce', icon="⛔")
+       st.metric(label='Message', value=f"{data[data['type'] == 'bounce']['total_count'].sum()}")
     with c4:
-       st.info('Percentile 100 %', icon="⏱")
-       st.metric(label='USD', value=f"{np.percentile(data['total_count'], 100):,.2f}")
+       st.info('Soft Bounce', icon="⚠")
+       st.metric(label='Message', value=f"{data[(data['type'] == 'bounce') & (data['bounce_type'] == 'soft')]['total_count'].sum()}")
     with c5:
-       st.info('Percentile 0 %', icon="⏱")
-       st.metric(label='USD', value=f"{np.percentile(data['total_count'], 0):,.2f}")
+       st.info('Hard Bounce', icon="🚫")
+       st.metric(label='Message', value=f"{data[(data['type'] == 'bounce') & (data['bounce_type'] == 'hard')]['total_count'].sum()}")
 
 
 col1, col2 = st.columns(2)
