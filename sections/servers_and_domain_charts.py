@@ -7,6 +7,7 @@ def set_servers_and_domain_charts(st , data ):
         dt = prepare_date(data)
         melted_df = dt.melt(id_vars='Server', var_name='Value_Type', value_name='Value')
         fig = px.bar(melted_df, x='Value', y='Server', orientation='h', color='Value_Type' , barmode='group')
+        fig.update_layout(title='Servers Stats')
         st.plotly_chart(fig)
     with col2:
         dt = data[data['type'] == 'delivered'].groupby(['email_domain'])['total_count'].sum().reset_index().head(10).sort_values(by=["total_count"],ascending=True)
