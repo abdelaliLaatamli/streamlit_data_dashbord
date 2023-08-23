@@ -9,6 +9,7 @@ sqlalchemy = "*"
 mysqlclient = "*"
 streamlit-option-menu = "*"
 plotly = "*"
+pandasql = "*"
 
 [dev-packages]
 
