@@ -29,12 +29,25 @@ if start_date or end_date:
     query = f"SELECT * FROM drive_stats WHERE date BETWEEN '{start_date}' AND '{end_date}'"
     data_devices = connection.query(query)
 
-st.dataframe(data_devices)
+# st.dataframe(data_devices)
     
 set_map_plot(st,data)
 
+col1, col2 , col3 = st.columns(3)
+with col1:
+    device_type = data_devices[['device_type' , 'total_count']].groupby(['device_type'])['total_count'].sum().reset_index().head(10).sort_values(by=["total_count"],ascending=True)
+    fig = px.pie(device_type, names='device_type', values='total_count' )
+    fig.update_layout(title='Device type')
+    st.plotly_chart(fig)
 
-device_type = data_devices[['device_type' , 'total_count']].groupby(['device_type'])['total_count'].sum().reset_index().head(10).sort_values(by=["total_count"],ascending=True)
-fig = px.pie(device_type, names='device_type', values='total_count', hole=0.5)
-fig.update_layout(title='Device type')
-st.plotly_chart(fig)
+with col2:
+    device_type = data_devices[['os_family' , 'total_count']].groupby(['os_family'])['total_count'].sum().reset_index().head(10).sort_values(by=["total_count"],ascending=False)
+    fig = px.bar( device_type, x='os_family', y='total_count'  )
+    fig.update_layout(title='Operating System')
+    st.plotly_chart(fig)
+
+with col3:
+    device_type = data_devices[['browser_family' , 'total_count']].groupby(['browser_family'])['total_count'].sum().reset_index().head(10).sort_values(by=["total_count"],ascending=True)
+    fig = px.pie(device_type, names='browser_family', values='total_count' , hole=0.5 )
+    fig.update_layout(title='Browser')
+    st.plotly_chart(fig)
