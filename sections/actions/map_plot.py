@@ -25,6 +25,7 @@ def set_map_plot(st,data):
         color='total_count',             # Column with data values
         hover_name='country',  # Tooltip labels
         color_continuous_scale="sunsetdark",  # Color scale
+        locationmode = 'ISO-3', 
         # colorscale="sunsetdark",
         # color_continuous_scale=custom_colors,
         title="Choropleth Map with DataFrame"
