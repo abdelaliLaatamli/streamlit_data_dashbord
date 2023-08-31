@@ -53,7 +53,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     device_type = data_devices[['browser_family' , 'total_count']].groupby(['browser_family'])['total_count'].sum().reset_index().head(10).sort_values(by=["total_count"],ascending=True)
-    fig = px.pie(device_type, names='browser_family', values='total_count' , hole=0.5 )
+    fig = px.pie(device_type, names='browser_family', values='total_count' , hole=0.4 )
     fig.update_layout(title='Browser')
     st.plotly_chart(fig)
 

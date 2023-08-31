@@ -16,3 +16,4 @@ def set_metrics(st,data):
         with c5:
             st.info('Hard Bounce', icon="🚫")
             st.metric(label='Message', value=f"{data[(data['type'] == 'bounce') & (data['bounce_type'] == 'hard')]['total_count'].sum():,}")
+

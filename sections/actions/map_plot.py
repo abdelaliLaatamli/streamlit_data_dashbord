@@ -12,11 +12,19 @@ def set_map_plot(st,data):
         .sort_values(by=['total_count'], ascending=False)
 
     countries = pd.read_csv( Path( os.path.join( os.getcwd() , "./data/all.csv") ).resolve() )[['alpha-2', 'alpha-3']]
+    countries.rename(columns={'alpha-2': 'country'}, inplace=True)
 
-    joined = grouped_by.join(countries.set_index('alpha-2'), on='country')[['alpha-3', 'total_count']]
+
+    joined = grouped_by.join(countries.set_index('country'), on='country')[['alpha-3', 'total_count']]
+    # joined = pd.merge( grouped_by , countries , on='country', how='right')[['total_count', 'alpha-3']]
+    joined['total_count'] = joined['total_count'].fillna(0)
     joined.rename(columns={'alpha-3': 'country'}, inplace=True)
+    # st.dataframe(joined)
+    # st.dataframe()
+
+    # joined.rename(columns={'alpha-3': 'country'}, inplace=True)
    
-    custom_colors = ["#FF5733", "#FFC300", "#4CAF50", "#008CBA", "#5634A1"]
+    # custom_colors = ["#FF5733", "#FFC300", "#4CAF50", "#008CBA", "#5634A1"]
 
 
     fig = px.choropleth(
