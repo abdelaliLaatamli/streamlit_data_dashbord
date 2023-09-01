@@ -30,8 +30,8 @@ def set_metrics(st,data_logs , data_actions):
             st.info('Click', icon="👆")
             st.metric(label='Message', value=f"{data_actions[data_actions['type'] == 'click']['total_count'].sum():,}")
         with c4:
-            st.info('Unsub', icon="⚠")
-            st.metric(label='Message', value=f"{data_actions[(data_actions['type'] == 'unsub') & (data_logs['bounce_type'] == 'soft')]['total_count'].sum():,}")
+            st.info('Unsub', icon="📫")
+            st.metric(label='Message', value=f"{data_actions[data_actions['type'] == 'unsub']['total_count'].sum():,}")
         with c5:
-            st.info('Conversion', icon="🚫")
+            st.info('Conversion', icon="💱")
             st.metric(label='Message', value=f"{data_actions[data_actions['type'] == 'oops']['total_count'].sum():,}")

@@ -3,7 +3,7 @@ import datetime
 def set_dates_range(st):
     date_range = st.date_input(
         "Selete you date range",
-        (datetime.datetime.now(), datetime.datetime.now()),
+        (datetime.datetime.now().replace(day=1), datetime.datetime.now()),
         format="MM.DD.YYYY",
     )
     if date_range:

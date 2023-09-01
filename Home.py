@@ -2,8 +2,8 @@
 import streamlit as st
 
 
-from sections.home import set_metrics
-from sections import set_servers_and_domain_charts,set_area_plot,set_sidebar,set_dates_range,set_pie_charts
+from sections.home import set_metrics , set_area_plot
+from sections import set_servers_and_domain_charts,set_sidebar,set_dates_range,set_pie_charts
 
 st.set_page_config(page_title="Dashbord" , page_icon="🌍" , layout="wide")
 st.subheader("📧 Email Marketing analytics platform ")
@@ -25,12 +25,12 @@ if start_date or end_date:
     query = f"SELECT * FROM actions_table WHERE date BETWEEN '{start_date}' AND '{end_date}'"
     data_actions = connection.query(query)
 
-st.dataframe(data_actions)
+# st.dataframe(data_actions)
 
 
 set_metrics(st,data_logs , data_actions)
 
-set_area_plot(st , data_logs)
+set_area_plot(st , data_actions)
 
 set_servers_and_domain_charts(st,data_logs)
 
