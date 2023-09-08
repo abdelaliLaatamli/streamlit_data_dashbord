@@ -1,8 +1,9 @@
-
 import streamlit as st
+import pandas as pd
 
 
-from sections.home import set_metrics , set_area_plot
+
+from sections.home import set_metrics , set_area_plot , set_funnel
 from sections import set_servers_and_domain_charts,set_sidebar,set_dates_range,set_pie_charts
 
 st.set_page_config(page_title="Dashbord" , page_icon="🌍" , layout="wide")
@@ -30,9 +31,12 @@ if start_date or end_date:
 
 set_metrics(st,data_logs , data_actions)
 
+set_funnel(st,data_logs,data_actions)
+
 set_area_plot(st , data_actions)
 
 set_servers_and_domain_charts(st,data_logs)
+
 
 set_pie_charts(st,data_logs)
 
